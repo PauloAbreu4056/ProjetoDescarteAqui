@@ -1,27 +1,22 @@
 
 <ion-header>
  <ion-navbar>
-
-    <ion-title>Cadastro de usuário</ion-title>
-
-  </ion-navbar>
+    <ion-title>
+      Cadastro de usuário
+    </ion-title>
+ </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-<form novalidate [formGroup]="registerForm"(ngSubmit)="submitForm()">
-<ion-list>
-    
-       <ion-item>
+
+  <h1 class="custom-title_cadUsu">DescarteAqui </h1>
+
+  <form novalidate [formGroup]="registerForm"(ngSubmit)="submitForm()">
+
+  <ion-list>
+      <ion-item>
         <ion-input type="text" placeholder="Nome"formControlName="name"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input type="endereco" placeholder="Endereço"formControlName="endereco"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input type="telefone" placeholder="Telefone"formControlName="telefone"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -35,7 +30,6 @@
       <ion-item>
         <ion-input type="password" placeholder="Confirme a senha"formControlName="confirmPassword"></ion-input>
       </ion-item>
-
 </ion-list>
 
       <div padding>

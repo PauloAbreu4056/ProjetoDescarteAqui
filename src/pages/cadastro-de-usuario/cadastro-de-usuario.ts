@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
-/**import { ValidateConfirmPassword } from '../../validators/confirmPassword';*/
+/** import { ValidateConfirmPassword } from '../../validators/confirmPassword';*/
+
 
 
 
@@ -17,7 +18,7 @@ import { AlertController } from 'ionic-angular';
 
 export class CadastroDeUsuarioPage {
 
-  registerForm: FormGroup;
+registerForm: FormGroup;
 
   constructor(
     public navCtrl: NavController, 
@@ -29,8 +30,8 @@ export class CadastroDeUsuarioPage {
       this.registerForm = this.formbuilder.group({
 
        name: [null,[Validators.required, Validators.minLength(5)]],
-       endereco: [null,[Validators.required, Validators.minLength(5)]],
-       telefone: [null,[Validators.required, Validators.minLength(11)]],
+       //endereco: [null,[Validators.required, Validators.minLength(5)]],
+       //telefone: [null,[Validators.required, Validators.minLength(11)]],
        email: [null,[Validators.required, Validators.email]],
        password: [null,[Validators.required, Validators.minLength(6)]],
        confirmPassword: [null,[Validators.required, Validators.minLength(6)]]

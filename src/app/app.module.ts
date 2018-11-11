@@ -10,12 +10,14 @@ import { ContatoProvider } from '../providers/contato/contato';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage
+   
   ],
   imports: [
     BrowserModule,
@@ -26,13 +28,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
   entryComponents: [
     MyApp,
     HomePage
+   
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFireAuth,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ContatoProvider
+    ContatoProvider,
+    Geolocation
   ]
 })
 export class AppModule {}

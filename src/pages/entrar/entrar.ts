@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
 
+
 @IonicPage({
   name: 'entrar',
 })
@@ -12,7 +13,9 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'entrar.html',
 })
 export class EntrarPage {
-entrarForm: FormGroup;
+
+  entrarForm: FormGroup;
+  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -20,17 +23,18 @@ entrarForm: FormGroup;
     public afAuth: AngularFireAuth,
     public alertCtrl: AlertController
     ) {
-      this.entrarForm = formbuilder.group({
+      this.entrarForm=formbuilder.group({
         email: [null,[Validators.required, Validators.email]],
         password: [null,[Validators.required, Validators.minLength(6)]]
       })
   } 
 
   submitEntrar () {
+    //alert(1);
     this.afAuth.auth.signInWithEmailAndPassword(
     this.entrarForm.value.email, this.entrarForm.value.password)
     .then(() =>{ 
-    this.presentAlert('Usuário autenticado','');
+    this.presentAlert('Usuário autenticado com sucesso','');
     this.navCtrl.setRoot('pagina-inicial');
     })
     .catch((error) => {
