@@ -30,7 +30,7 @@ export class EntrarPage {
   } 
 
   submitEntrar () {
-    //alert(1);
+   
     this.afAuth.auth.signInWithEmailAndPassword(
     this.entrarForm.value.email, this.entrarForm.value.password)
     .then(() =>{ 

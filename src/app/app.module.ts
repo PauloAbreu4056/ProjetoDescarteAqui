@@ -11,13 +11,14 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage
-   
+  
   ],
   imports: [
     BrowserModule,
@@ -29,6 +30,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     MyApp,
     HomePage
    
+   
   ],
   providers: [
     StatusBar,
@@ -36,7 +38,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     AngularFireAuth,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ContatoProvider,
-    Geolocation
+    Geolocation,
+    Camera
   ]
 })
 export class AppModule {}
