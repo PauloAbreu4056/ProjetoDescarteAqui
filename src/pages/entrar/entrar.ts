@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage({
   name: 'entrar',
@@ -21,7 +22,9 @@ export class EntrarPage {
     public navParams: NavParams,
     public formbuilder: FormBuilder,
     public afAuth: AngularFireAuth,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public storage: Storage,
+    public loadingCtrl: LoadingController
     ) {
       this.entrarForm=formbuilder.group({
         email: [null,[Validators.required, Validators.email]],
@@ -29,13 +32,21 @@ export class EntrarPage {
       })
   } 
 
+  
+  
+
   submitEntrar () {
    
     this.afAuth.auth.signInWithEmailAndPassword(
     this.entrarForm.value.email, this.entrarForm.value.password)
-    .then(() =>{ 
-    this.presentAlert('Usuário autenticado com sucesso','');
+    .then((response) =>{ 
+    this.storage.set('user',response.user.uid)
+    .then(()=>{
     this.navCtrl.setRoot('pagina-inicial');
+           
+      })
+           
+   
     })
     .catch((error) => {
       if(error.code == 'auth/wrong-password'){
@@ -51,5 +62,17 @@ export class EntrarPage {
       buttons: ['Ok']
     });
     alert.present();
+  }
+  ionViewCanEnter(){
+      this.storage.get('user')
+      .then((resolve) => {if(resolve.length >0){
+this.navCtrl.setRoot('pagina-inicial');
+      }else{
+        return true;
+      }
+      })
+      .catch(() =>{
+        return true;
+      })
   }
 }

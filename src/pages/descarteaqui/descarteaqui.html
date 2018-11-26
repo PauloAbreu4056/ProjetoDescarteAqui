@@ -1,29 +1,31 @@
 
 <ion-header>
   
-  <ion-navbar>
-    <ion-title>descarteaqui</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title>Descarte Aqui</ion-title>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-    <ion-item>
-        <ion-input type="email"placeholder="Imagem"></ion-input>
-    </ion-item>
 
-    <button ion-button block class = "button-salvar">Procurar imagem</button>
-    <button ion-button block class = "button-remover">Remover imagem</button>
-    <ion-card>
-      <ion-card-content>
-        <button ion-button color="danger"ion-rig black (click)="takePicture();"> Click
-          <ion-icon name="camera">
-    
-          </ion-icon>
-        </button>
-        <img [src]="base64Image">
-      </ion-card-content>
-    </ion-card> 
 
-   
-   
+
+ <ion-item>
+    <ion-input type="text" placeholder="Nome completo"[(ngModel)]="task"></ion-input>
+</ion-item>
+    <button ion-button block (click)="addTask(task)">Salvar dados</button>
+<div>
+  <ul>
+    <li *ngFor="let item of list">
+      {{ item.task }}
+    </li>
+  </ul>
+</div>
+
+
 </ion-content>
+
+<ion-footer padding>
+  <button ion-button large block (click)="takePicture()">Câmera</button>
+</ion-footer>

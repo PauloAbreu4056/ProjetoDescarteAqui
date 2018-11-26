@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
-/** import { ValidateConfirmPassword } from '../../validators/confirmPassword';*/
+//import { ValidateConfirmPassword } from '../../validators/confirmPassword';
 
 
 
@@ -43,7 +43,7 @@ registerForm: FormGroup;
    this.afAuth.auth.createUserWithEmailAndPassword(
    this.registerForm.value.email, this.registerForm.value.password)
    .then((response) => {
-     this.presentAlert('Usuário cadastrado', 'Usuário cadastrado com socesso.');
+     this.presentAlert('Atenção!', 'Usuário cadastrado com socesso.');
      this.navCtrl.setRoot('pagina-inicial');
     })
    .catch((error) => {

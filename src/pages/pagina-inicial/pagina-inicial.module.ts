@@ -9,5 +9,8 @@ import { PaginaInicialPage } from './pagina-inicial';
   imports: [
     IonicPageModule.forChild(PaginaInicialPage),
   ],
+  exports: [
+    PaginaInicialPage
+  ]
 })
 export class PaginaInicialPageModule {}

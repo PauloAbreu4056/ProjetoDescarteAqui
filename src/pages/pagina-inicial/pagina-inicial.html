@@ -1,18 +1,15 @@
 
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>pagina-inicial</ion-title>
-  </ion-navbar>
-
+    <ion-navbar color="danger" >
+    <ion-title>Página Inicial</ion-title>
+   </ion-navbar>
 </ion-header>
-
 
 <ion-content padding>
 
     <div class="container-buttons">
-        <button ion-button outline [navPush]="'descarteaqui'">DescarteAqui</button>
-        <button ion-button outline [navPush]="'procureaqui'">ProcureAqui</button>
-      </div>
-
+        <button ion-button block class color="secondary" [navPush]="'descarteaqui'">DescarteAqui</button>
+        <button ion-button block class [navPush]="'procureaqui'">ProcureAqui</button>
+    </div>
+  
 </ion-content>
