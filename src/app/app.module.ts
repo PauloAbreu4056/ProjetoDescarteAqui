@@ -17,6 +17,9 @@ import { FileTransfer} from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { IonicStorageModule } from '@ionic/storage';
 import { PaginaInicialPage } from '../pages/pagina-inicial/pagina-inicial';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   declarations: [
@@ -48,10 +51,10 @@ import { PaginaInicialPage } from '../pages/pagina-inicial/pagina-inicial';
     Camera,
     FileTransfer,
     AngularFireDatabase,
+    GoogleMaps,
+    ImagePicker,
     File
-
-    
-     
+  
   ]
 })
 export class AppModule {}

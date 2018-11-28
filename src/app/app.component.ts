@@ -6,6 +6,8 @@ import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { PaginaInicialPage } from '../pages/pagina-inicial/pagina-inicial';
 
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,7 +18,8 @@ export class MyApp {
     platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen,
-    private storage: Storage
+    private storage: Storage,
+    
 
     ) {
     platform.ready().then(() => {

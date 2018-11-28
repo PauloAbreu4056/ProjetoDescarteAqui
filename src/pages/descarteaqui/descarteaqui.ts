@@ -17,8 +17,9 @@ export class DescarteaquiPage {
   uid: string;
   task;
   list;
-  photo: string = "";
-  //currentPhoto;
+  lista;
+  photo: string;
+ 
 constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -33,16 +34,21 @@ constructor(
   {this.storage.get('user')
   .then((resolve)=>{
   this.uid = resolve;
+  this.photo = resolve;
   this.getList();})
   console.log('ionViewDidLoad TakePicture');
   }
-    addTask(task: string){
-    this.db.database.ref('/tasks').child(this.uid).push({
-    task: task
-    })
+    addTask(task: string ){
+    this.db.database.ref('/tasks').child(this.uid).push({task: task })
     .then(()=>{
     this.task = " ";
      })}
+
+    addTask1(task1: string){
+    this.db.database.ref('/tasks').child(this.photo).push({task1: task1})
+      .then(()=>{
+      task1 = " ";
+      })}
     getList(){
       let listDB = this.db.database.ref('/tasks').child(this.uid);
       listDB.on('value', (snapshot)=>{
@@ -50,13 +56,14 @@ constructor(
       this.list = Object.keys(itens).map(i => itens[i]);
     })}
 
-
-   
+    getLista(){
+    let listaDB = this.db.database.ref('/tasks').child(this.photo);
+    listaDB.on('value', (snapshot)=>{
+      const itens = snapshot.val();
+      this.lista = Object.keys(itens).map(i => itens[i]);
+    })}
   
-    
-
-
-     takePicture(){
+      takePicture(){
       this.photo = '';
       const options: CameraOptions = {
         quality: 100,
@@ -77,17 +84,7 @@ constructor(
         console.error(error);
       })
     }
-    /** getPhoto(type){
-      const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType:this.camera.MediaType.PICTURE,
-      sourceType: type == "picture" ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-      correctOrientation: true
-    };
-    this.camera.getPicture(options).then((imageData) => {
-    this.currentPhoto = 'data:image/jpeg;base64,' + imageData;}, (err) => {});*/
+ 
   }
 
  

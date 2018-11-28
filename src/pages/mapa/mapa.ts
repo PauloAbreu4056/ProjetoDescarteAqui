@@ -1,59 +1,82 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/google-maps';
 
 @IonicPage({
   name: 'mapa',
 })
 @Component({
-  selector: 'page-mapa',
+  selector: 'page-mapa', 
   templateUrl: 'mapa.html',
 })
 export class MapaPage {
-  imoveis: Array<Imovel>;
-  constructor(public navCtrl: NavController,public navParams: NavParams) {
-
-   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MapaPage');
-    this.getImoveis();
-
-  } 
-getImoveis() {
-  this.imoveis = [
-    new Imovel('Apartamento com 2 Quartos para Venda ou Aluguel, 80 m²', 295.000, 'Rua Eduardo Viviani', '400', 'Boa Vista', 'Juiz de Fora', 'MG'),
-    new Imovel('Parque Jardim dos Bandeirantes, 80 m²', 152.074, 'Avenida Garcia Rodrigues Paes', '0', 'Jóckey Club', 'Juiz de Fora', 'MG'),
-    new Imovel('Apartamento com 2 Quartos à Venda, 72 m²', 138.000, 'Rua Aurora Tôrres', '10', 'Santa Luzia', 'Juiz de Fora', 'MG')];
-}}
-
-
-export class Imovel {
-  nome: string;
-  valor: number;
-  logradouro: string;
-  numero: string;
-  bairro: string;
-  cidade: string;
-  estado: string;
-  mapa: string;
+  map: GoogleMap;
+  
  
-  constructor(nome: string, valor: number, logradouro: string, numero: string, bairro: string, cidade: string, estado: string ) {
-    this.nome = nome;
-    this.valor = valor;
-    this.logradouro = logradouro;
-    this.numero = numero;
-    this.bairro = bairro;
-    this.cidade = cidade;
-    this.estado = estado;
-    this.mapa = this.getMapa();
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public platform: Platform,
+    public googleMaps: GoogleMaps){
+
     }
-    private getEndereco() {
-      return this.logradouro + ', ' + this.numero + ' - ' + this.bairro + ', ' + this.cidade + ' - ' + this.estado;
+    ionViewDidLoad(){
+      this.loadMap();
+    }
+    
+    loadMap(){
+
+      let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
+            lat: 43.0741904, // default location
+            lng: -89.3809802 // default location
+          },
+          zoom: 18,
+          tilt: 30
+        }
+      };
+    
+      this.map = this.googleMaps.create('map_canvas', mapOptions);
+    
+      // Wait the MAP_READY before using any methods.
+      this.map.one(GoogleMapsEvent.MAP_READY)
+      .then(() => {
+        // Now you can use all methods safely.
+        this.getPosition();
+      })
+      .catch(error =>{
+        console.log(error);
+      });
+    
+    }
+    
+    getPosition(): void{
+      this.map.getMyLocation()
+      .then(response => {
+        this.map.moveCamera({
+          target: response.latLng
+        });
+        this.map.addMarker({
+          title: 'My Position',
+          icon: 'blue',
+          animation: 'DROP',
+          position: response.latLng
+        });
+      })
+      .catch(error =>{
+        console.log(error);
+      });
     }
    
-    private getMapa() {
-      return 'https://maps.googleapis.com/maps/api/staticmap?zom=15&size=400x400&markers=color:red|' + this.getEndereco() + '&key= AIzaSyBWRy-o9fpKthWSaBKCqwqT3inQYj3RBiE'
-    }
-  
 
 }
+
+
+
+ 
+  
+  
+
+

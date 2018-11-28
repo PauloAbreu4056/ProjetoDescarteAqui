@@ -14,11 +14,20 @@
  <ion-item>
     <ion-input type="text" placeholder="Nome completo"[(ngModel)]="task"></ion-input>
 </ion-item>
-    <button ion-button block (click)="addTask(task)">Salvar dados</button>
+    <button ion-button block (click)="addTask(task)">Salvar Dados</button>
+    <button ion-button block (click)="addTask1(task1)">Salvar Imagem</button>
 <div>
   <ul>
     <li *ngFor="let item of list">
       {{ item.task }}
+    </li>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let item of lista">
+      {{ item.task1 }}
     </li>
   </ul>
 </div>
